@@ -10,9 +10,9 @@
 using namespace std;
 int main()
 {
-	string input, output
-		cout << "Įveskite norimą tekstą: ";
-	getline(input);
+	string input, output;
+	cout << "Įveskite norimą tekstą: ";
+	getline(cin, input);
 	output = input;
 	cout << "Rezultatas: ";
 	cout << output;
