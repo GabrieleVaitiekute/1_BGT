@@ -32,7 +32,13 @@ int main()
         output += hash;
     }
 	
-	
+	for(char b : output)
+	{
+		if (!(b >= 'a' && b <= 'z' || b >= '0' && b <= '9'))
+		b = 'g';
+		
+		output += b;
+	}
 	if (output.size() > 20)
 	output = output.substr(0, 20);
 
