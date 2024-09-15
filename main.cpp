@@ -11,7 +11,7 @@ using namespace std;
 int main()
 {
 	string input, output;
-	cout << "Įveskite norimą tekstą: ";
+	cout << "Iveskite norima teksta: ";
 	getline(cin, input);
 	output = input;
 	cout << "Rezultatas: ";
