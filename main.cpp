@@ -13,7 +13,17 @@ int main()
 	string input, output;
 	cout << "Iveskite norima teksta: ";
 	getline(cin, input);
-	output = input;
+	for (char a : input)
+	{
+		char newh;
+		if(!(a >= 'a' && a <= 'z' || a >= '0' && a <= '9'))
+		{	
+			a = 'b';
+		}
+		
+		newh = a + 2;
+		output += newh;
+	}
 	cout << "Rezultatas: ";
 	cout << output;
 }
