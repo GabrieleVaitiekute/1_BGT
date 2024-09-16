@@ -13,32 +13,25 @@ int main()
 	string input, output;
 	std::cout << "Iveskite norima teksta: ";
 	getline(cin, input);
-	for (char a : input)
+	int length = input.length();
+	for (int i = 0; i < length; i++)
 	{
-		
+		char a = input[i];
 		if(!(a >= 'a' && a <= 'z' || a >= '0' && a <= '9'))
 		{	
 			a = 'b';
 		}
-		
-        char new1 = a + 2 % 256;
-        char new2 = a * 3 % 256;
-        char new3 = a - 1 % 256;
-        char new4 = a + 4 % 256;
-        
-        
-        std::string hash = {new1, new2, new3, new4};
-        
-        output += hash;
+        char x = (a + 3); 
+        char y = (i + 1 < length) ? input[i + 1] : input[0];  
+		char z = (i + 1 < length) ? static_cast<int>(input[i + 1]) % 256 : static_cast<int>(input[0]) % 256;
+
+		std::string hash;
+		hash.push_back(x);
+		hash += std::to_string(static_cast<unsigned char>(y));
+		hash.push_back(static_cast<char>(z));  
+ 		output += hash;
     }
 	
-	for(char b : output)
-	{
-		if (!(b >= 'a' && b <= 'z' || b >= '0' && b <= '9'))
-		b = 'g';
-		
-		output += b;
-	}
 	if (output.size() > 20)
 	output = output.substr(0, 20);
 
