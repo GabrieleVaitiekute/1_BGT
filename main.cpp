@@ -7,6 +7,20 @@
 #include <string>
 #include <vector>
 
+char wrapCharacter(int value)
+{
+    int numLetters = 26; // nuo a iki z
+    int numDigits = 10;  //  nuo 0 to 9
+    int totalCharacters = numLetters + numDigits; // is viso 
+    value = value % totalCharacters; 
+
+    if (value < numLetters)
+        return 'a' + value; 
+    
+	else 
+        return '0' + (value - numLetters); 
+    
+}
 using namespace std;
 int main()
 {
@@ -16,24 +30,20 @@ int main()
 	int length = input.length();
 	for (int i = 0; i < length; i++)
 	{
-		char a = input[i];
-		if(!(a >= 'a' && a <= 'z' || a >= '0' && a <= '9'))
-		{	
-			a = 'b';
-		}
-        char x = (a + 3); 
-        char y = (i + 1 < length) ? input[i + 1] : input[0];  
-		char z = (i + 1 < length) ? static_cast<int>(input[i + 1]) % 256 : static_cast<int>(input[0]) % 256;
-
-		std::string hash;
-		hash.push_back(x);
-		hash += std::to_string(static_cast<unsigned char>(y));
-		hash.push_back(static_cast<char>(z));  
- 		output += hash;
+		
+		char x = wrapCharacter(input[(i + 4) % length] + 3);
+	
+        char y = wrapCharacter(((i + 1 < length) ? input[i + 1] : input[0]) * 7);
+		
+        char z = wrapCharacter(((i + 1 < length) ? static_cast<int>(input[i + 1]) : static_cast<int>(input[0])) % 256);
+		
+		output.push_back(x);
+        output.push_back(y);
+        output.push_back(z);
     }
 	
-	if (output.size() > 20)
-	output = output.substr(0, 20);
+	if (output.size() > 64)
+	output = output.substr(0, 64);
 
 	cout << "Rezultatas: ";
 	cout << output;
