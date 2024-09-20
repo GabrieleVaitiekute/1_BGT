@@ -27,15 +27,24 @@ int main()
 	string input, output;
 	std::cout << "Iveskite norima teksta: ";
 	getline(cin, input);
+	int s = 0;
+	while(input.length() < 63)
+	{
+		input.push_back(input[s * s]);
+		s++;
+	}
+	
+
 	int length = input.length();
-	for (int i = 0; i < length; i++)
+	
+	for (int i = length; i > 0; i--)
 	{
 		
-		char x = wrapCharacter(input[(i + 4) % length] + 3);
+		char x = wrapCharacter(input[(i - 4) % length] + 3);
 	
-        char y = wrapCharacter(((i + 1 < length) ? input[i + 1] : input[0]) * 7);
+        char y = wrapCharacter(((i % 2 == 0) ? input[i + 1] : input[0]) * 7);
 		
-        char z = wrapCharacter(((i + 1 < length) ? static_cast<int>(input[i + 1]) : static_cast<int>(input[0])) % 256);
+        char z = wrapCharacter(((i % 2 != 0) ? static_cast<int>(input[i + 1]) : static_cast<int>(input[0])) % 256);
 		
 		output.push_back(x);
         output.push_back(y);
