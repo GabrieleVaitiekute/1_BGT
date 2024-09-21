@@ -7,17 +7,87 @@
 #include <string>
 #include <vector>
 
-std::string stringToHex(const std::string& output) {
+std::string stringToHex(const std::string& output)
+{
     std::ostringstream hexStream;
 
     for (unsigned char c : output) 
-	{
-        // Kiekvieną simbolį paverčia į šešioliktainę reikšmę
         hexStream << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(c);
-    }
-
+    
 	return hexStream.str();
 
+}
+
+
+int calculate_ascii_sum(const std::string& str)
+{
+    int ascii_sum = 0;
+    for (char ch : str) 
+        ascii_sum += static_cast<int>(ch);
+    
+    return ascii_sum;
+}
+
+
+std::string recombine_pieces(std::vector<std::string>& pieces)
+{
+
+    std::vector<std::pair<int, std::string>> piece_scores;
+    
+    for (const auto& piece : pieces)
+	{
+        int score = calculate_ascii_sum(piece);
+        piece_scores.push_back({score, piece});
+    }
+    
+
+    std::sort(piece_scores.begin(), piece_scores.end(), [](const std::pair<int, std::string>& a, const std::pair<int, std::string>& b) {
+        return a.first < b.first;  // Sort based on the score
+    });
+    
+
+    std::string recombined_string;
+    for (const auto& piece : piece_scores) 
+        recombined_string += piece.second;
+    
+    return recombined_string;
+}
+
+std::vector<int> calculate_split_points(const std::string& FinalOutput, int max_splits)
+{
+    std::vector<int> split_points;
+    int total_length = FinalOutput.length();
+    
+    int ascii_sum = calculate_ascii_sum(FinalOutput);
+
+    for (int i = 1; i <= max_splits; i++) 
+	{
+        int split_point = (ascii_sum * i + static_cast<int>(FinalOutput[i % total_length])) % total_length;
+        if (split_point > 0 && split_point < total_length && std::find(split_points.begin(), split_points.end(), split_point) == split_points.end())
+		{
+            split_points.push_back(split_point);
+        }
+    }
+    
+    // Sort the split points to ensure proper splitting order
+    std::sort(split_points.begin(), split_points.end());
+    
+    return split_points;
+}
+
+std::vector<std::string> split_string(const std::string& FinalOutput, int max_splits) 
+{
+    std::vector<int> split_points = calculate_split_points(FinalOutput, max_splits);
+    std::vector<std::string> pieces;
+    
+    int start = 0;
+    for (int split_point : split_points) {
+        pieces.push_back(FinalOutput.substr(start, split_point - start));
+        start = split_point;
+    }
+    pieces.push_back(FinalOutput.substr(start));  // Add the last piece
+    
+    return pieces;
 }
 
 using namespace std;
@@ -30,7 +100,7 @@ int main()
 
 	while(input.length() < 63)
 	{
-		input.push_back(input[s * 2]);
+		input.push_back(input[s % input.length()]);
 		s++;
 	}
 	
@@ -40,41 +110,25 @@ int main()
 		
 		char x = (input[(i - 4) % input.length()] + 3);
 	
-        char y = (((i % 2 == 0) ? input[i + 1] : input[0]) * 7);
-		
-        char z = (((i % 2 != 0) ? static_cast<int>(input[i + 1]) : static_cast<int>(input[0])) % 256);
+		char y = (((i % 2 == 0) ? input[(i + 1) % input.length()] : input[0]) * 7);
+
+		char z = (((i % 2 != 0) ? static_cast<int>(input[(i + 1) % input.length()]) : static_cast<int>(input[0])) % 256);
 		
 		output.push_back(x);
         output.push_back(y);
         output.push_back(z);
     }
 
-	for(int e = 0; e < 32; e += 2)
-	{
-		swap(output[e], output[63-e]);
-	}
 	std::string FinalOutput = stringToHex(output);
+
+    int max_splits = 8; 
+    std::vector<std::string> pieces = split_string(FinalOutput, max_splits);
+
+	FinalOutput = recombine_pieces(pieces);
 
 	if (FinalOutput.size() > 64)
 	FinalOutput = FinalOutput.substr(0, 64);
 
-	
-	cout << "Rezultatas: ";
-	cout << FinalOutput;
+	cout << "Rezultatas: " << FinalOutput;
 
 }
-/*Laba      
-x2inaek2gpnef2ug6ee2kdnea2m2oe22dahea2aepe82zj5ej27xpeo2bebed2gs
-s22neee22peex22geej22deee222eea2d2hoamaapn8kze56ju7fpnogbkbadigx
-s2idaee2gonex2uj6ej2k8nee2maoea2d2he22aaped2ze5eg27fpep2bkben2gx
-4374c052d03c4034c3b60efc4694c90fe64641176475f4440117447027451112
-4344c052d03c4034c3b60efc4694c90fe6664ff76675f4640ff746f02765bff2
-461414724c4c801414464c4c2014146f4c4c931414704c4c3a14143a4c4cd314
-laba      
-xainaakagpnafaug6aeakdnaaam2oa2adahaaaaepa8azj5aja7xpaoabebadags
-saanaaeaapaaxaagaajaadaaeaa2aaaad2hoamaapn8kze56ju7fpnogbkbadigx
-saidaaeagonaxauj6ajak8naeamaoaaad2ha2aaapadaze5aga7fpapabkbanagx
-4344c052d03c4034c3b60efc4694c90fe6664ff76675f4640ff746f02765bff2
-46f4f4726c6c7ef4f4466c6c71f4f46f6c6c93f4f4706c6c8bf4f48b6c6cd3f4
-
-*/
