@@ -1,9 +1,7 @@
 #include <iostream>
-#include <climits>
-#include <cmath>
+#include <fstream>
 #include <iomanip>
 #include <algorithm>
-#include <random>
 #include <string>
 #include <vector>
 
@@ -91,44 +89,67 @@ std::vector<std::string> split_string(const std::string& FinalOutput, int max_sp
 }
 
 using namespace std;
-int main()
-{
-	string input, output;
-	std::cout << "Iveskite norima teksta: ";
-	getline(cin, input);
-	int s = 0;
+int main(int argc, char* argv[])
+{  
+    string inputData;
+    string input, output;
+    if (argc > 1) 
+    {
+        // Failo pavadinimas buvo nurodytas per komandinę eilutę
+        std::ifstream inputFailas(argv[1]);
+        if (inputFailas) 
+        {
+            std::string line;
+            while (std::getline(inputFailas, line)) {
+                inputData += line + "\n";  // Nuskaito failo turinį
+            }
+            inputFailas.close();
+        } 
+        else 
+        {
+            std::cerr << "Nepavyko atidaryti failo: " << argv[1] << std::endl;
+            return 1;  // Klaidos kodas
+        }
+    } 
+    else 
+    {
+        std::cout << "Iveskite norima teksta: ";
+        getline(cin, input);
+    }
 
-	while(input.length() < 63)
-	{
-		input.push_back(input[s % input.length()]);
-		s++;
-	}
-	
-	
-	for (int i = input.length(); i > 0; i--)
-	{
-		
-		char x = (input[(i - 4) % input.length()] + 3);
-	
-		char y = (((i % 2 == 0) ? input[(i + 1) % input.length()] : input[0]) * 7);
+    int s = 0;
 
-		char z = (((i % 2 != 0) ? static_cast<int>(input[(i + 1) % input.length()]) : static_cast<int>(input[0])) % 256);
-		
-		output.push_back(x);
+    while(input.length() < 63)
+    {
+        input.push_back(input[s % input.length()]);
+        s++;
+    }
+    
+    
+    for (int i = input.length(); i > 0; i--)
+    {
+        
+        char x = (input[(i - 4) % input.length()] + 3);
+    
+        char y = (((i % 2 == 0) ? input[(i + 1) % input.length()] : input[0]) * 7);
+
+        char z = (((i % 2 != 0) ? static_cast<int>(input[(i + 1) % input.length()]) : static_cast<int>(input[0])) % 256);
+        
+        output.push_back(x);
         output.push_back(y);
         output.push_back(z);
     }
 
-	std::string FinalOutput = stringToHex(output);
+    std::string FinalOutput = stringToHex(output);
 
     int max_splits = 8; 
     std::vector<std::string> pieces = split_string(FinalOutput, max_splits);
 
-	FinalOutput = recombine_pieces(pieces);
+    FinalOutput = recombine_pieces(pieces);
 
-	if (FinalOutput.size() > 64)
-	FinalOutput = FinalOutput.substr(0, 64);
+    if (FinalOutput.size() > 64)
+    FinalOutput = FinalOutput.substr(0, 64);
 
-	cout << "Rezultatas: " << FinalOutput;
-
+    cout << "Rezultatas: " << FinalOutput;
+    
 }
