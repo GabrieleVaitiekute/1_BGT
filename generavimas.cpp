@@ -7,14 +7,14 @@ std::random_device rd;
 std::mt19937 generuoti(rd());
 std::uniform_int_distribution<int> charKiekis(1001, 2000);
 std::uniform_int_distribution<char> dis(33, 126); // ASCII 
-using namespace std;
+
 
 int main()
 {
-    ofstream GenFailas("VienuSkiriasi1.txt");
+    std::ofstream GenFailas("VienuSkiriasi1.txt");
     if (!GenFailas.is_open())
         {
-            cerr << "Failed to open file." << endl;
+            std::cerr << "Failed to open file." << std::endl;
             return 1;
         }
 

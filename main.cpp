@@ -88,20 +88,18 @@ std::vector<std::string> split_string(const std::string& FinalOutput, int max_sp
     return pieces;
 }
 
-using namespace std;
 int main(int argc, char* argv[])
 {  
- 
-    string input, output;
+    std::string input, output;
     if (argc > 1) 
     {
         // Failo pavadinimas buvo nurodytas per komandinę eilutę
         std::ifstream inputFailas(argv[1]);
         if (inputFailas) 
         {
-            std::string line;
-            while (std::getline(inputFailas, line)) {
-                input += line;  // Nuskaito failo turinį
+            std::string eilute;
+            while (std::getline(inputFailas, eilute)) {
+                input += eilute;  // Nuskaito failo turinį
             }
             inputFailas.close();
         } 
@@ -114,7 +112,7 @@ int main(int argc, char* argv[])
     else 
     {
         std::cout << "Iveskite norima teksta: ";
-        getline(cin, input);
+        std::getline(std::cin, input);
     }
 
     int s = 0;
@@ -150,6 +148,6 @@ int main(int argc, char* argv[])
     if (FinalOutput.size() > 64)
     FinalOutput = FinalOutput.substr(0, 64);
 
-    cout << "Rezultatas: " << FinalOutput;
+    std::cout << "Rezultatas: " << FinalOutput;
     
 }
