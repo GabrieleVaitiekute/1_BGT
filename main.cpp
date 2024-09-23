@@ -91,7 +91,7 @@ std::vector<std::string> split_string(const std::string& FinalOutput, int max_sp
 using namespace std;
 int main(int argc, char* argv[])
 {  
-    string inputData;
+ 
     string input, output;
     if (argc > 1) 
     {
@@ -101,7 +101,7 @@ int main(int argc, char* argv[])
         {
             std::string line;
             while (std::getline(inputFailas, line)) {
-                inputData += line + "\n";  // Nuskaito failo turinį
+                input += line;  // Nuskaito failo turinį
             }
             inputFailas.close();
         } 
