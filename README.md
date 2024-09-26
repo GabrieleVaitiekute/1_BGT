@@ -63,8 +63,9 @@
   
   ### 4 ir 5 etapai
   Buvo sugenera 25 000 porų, kurių ilgis 10 simbolių, kitas 25 000 porų, kurių ilgis - 100, dar kitas 25000 poras - 500, ir galiausiai likusias 25 000 poras, kurių ilgis - 1000 simbolių. Failas su poromis nuskaičiuotas su programa, kuri išvedė gautus rezultatus į kitą failą, tuomet buvo nuskaityti duomenys ir kievienos poroas hash'ai palyginti. Nebuvo rasta nei vienos poros, vadinasi 6 reikalavimą, t.y., atsparumą kolizijai.
+  
   ### 6 etapas
-Ši versija negali atlikti šio punto reikalaujamo testavimo su 100000 porų, tačiau galima patikrinti kelias. Įvedus Lietuva ir lietuva gaunami nesutampantys rezultatai (771466968144c6c14614f3a4c641475792c6c14614f3a4c6c14754f2c4c64146 ir 77df6f3a6c6cf4756f2c6c64f46577f46968f46c6cf4616f3a6c679f47478c36), Laba diena - 1071424207a74c94fbc4c6464146171144c6814626ca74c67144c23a74c64146, o laba diena -  f4624696fbc6c67f42023a76c646e65c36c64f4696fbc6c64f42bc6c64f42071. 
+Ši versija negali atlikti šio punto reikalaujamo testavimo su 100000 porų, tačiau galima patikrinti kelias. Įvedus Lietuva ir lietuva gaunami šiektiek sutampantys rezultatai, tai indikuoja, kad kodą reikia tobulinti (771466968144c6c14614f3a4c641475792c6c14614f3a4c6c14754f2c4c64146 ir 77df6f3a6c6cf4756f2c6c64f46577f46968f46c6cf4616f3a6c679f47478c36), Laba diena - 1071424207a74c94fbc4c6464146171144c6814626ca74c67144c23a74c64146, o laba diena -  f4624696fbc6c67f42023a76c646e65c36c64f4696fbc6c64f42bc6c64f42071. 
   
   ### 7 etapas
 Viską apibendrinant, šiuo momentu yra sunku nustatyti kodo visas stiprybes ir trūkumus. Iš dabartiniu tyrimu galiu teigti, kad kodo greitis ir atsparumas kolizijai yra stiprybės. Na o silpnybė - neužbaigtas 6 testavimo etapas.
