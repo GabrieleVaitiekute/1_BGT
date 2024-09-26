@@ -17,7 +17,7 @@ std::string stringToHex(const std::string& output)
 }
 
 
-int calculate_ascii_sum(const std::string& str)
+int calculateASCIIsum(const std::string& str)
 {
     int ascii_sum = 0;
     for (char ch : str) 
@@ -27,14 +27,14 @@ int calculate_ascii_sum(const std::string& str)
 }
 
 
-std::string recombine_pieces(std::vector<std::string>& pieces)
+std::string recombinePieces(std::vector<std::string>& pieces)
 {
 
     std::vector<std::pair<int, std::string>> piece_scores;
     
     for (const auto& piece : pieces)
 	{
-        int score = calculate_ascii_sum(piece);
+        int score = calculateASCIIsum(piece);
         piece_scores.push_back({score, piece});
     }
     
@@ -44,46 +44,46 @@ std::string recombine_pieces(std::vector<std::string>& pieces)
     });
     
 
-    std::string recombined_string;
+    std::string recombinedString;
     for (const auto& piece : piece_scores) 
-        recombined_string += piece.second;
+        recombinedString += piece.second;
     
-    return recombined_string;
+    return recombinedString;
 }
 
-std::vector<int> calculate_split_points(const std::string& FinalOutput, int max_splits)
+std::vector<int> calculateSplitPoints(const std::string& FinalOutput, int max_splits)  
 {
     std::vector<int> split_points;
-    int total_length = FinalOutput.length();
+    int totalLength = FinalOutput.length();
     
-    int ascii_sum = calculate_ascii_sum(FinalOutput);
+    int ascii_sum = calculateASCIIsum(FinalOutput);
 
     for (int i = 1; i <= max_splits; i++) 
 	{
-        int split_point = (ascii_sum * i + static_cast<int>(FinalOutput[i % total_length])) % total_length;
-        if (split_point > 0 && split_point < total_length && std::find(split_points.begin(), split_points.end(), split_point) == split_points.end())
+        int split_point = (ascii_sum * i + static_cast<int>(FinalOutput[i % totalLength])) % totalLength;
+        if (split_point > 0 && split_point < totalLength && std::find(split_points.begin(), split_points.end(), split_point) == split_points.end())
 		{
             split_points.push_back(split_point);
         }
     }
     
-    // Sort the split points to ensure proper splitting order
-    std::sort(split_points.begin(), split_points.end());
+    std::sort(split_points.begin(), split_points.end());//Taškai surikiuojami didėjimo tvarka nuosekliam skaidymui.
     
     return split_points;
 }
 
-std::vector<std::string> split_string(const std::string& FinalOutput, int max_splits) 
+std::vector<std::string> splitString(const std::string& FinalOutput, int max_splits) 
 {
-    std::vector<int> split_points = calculate_split_points(FinalOutput, max_splits);
+    std::vector<int> splitPoints = calculateSplitPoints(FinalOutput, max_splits);
     std::vector<std::string> pieces;
     
     int start = 0;
-    for (int split_point : split_points) {
+    for (int split_point : splitPoints) 
+    {
         pieces.push_back(FinalOutput.substr(start, split_point - start));
         start = split_point;
     }
-    pieces.push_back(FinalOutput.substr(start));  // Add the last piece
+    pieces.push_back(FinalOutput.substr(start));  // Prideda paskutinę dalį
     
     return pieces;
 }
@@ -93,7 +93,7 @@ int main(int argc, char* argv[])
     std::string input, output;
     if (argc > 1) 
     {
-        // Failo pavadinimas buvo nurodytas per komandinę eilutę
+        // Jei failo pavadinimas buvo nurodytas per komandinę eilutę
         std::ifstream inputFailas(argv[1]);
         if (inputFailas) 
         {
@@ -103,7 +103,7 @@ int main(int argc, char* argv[])
             }
             inputFailas.close();
         } 
-        else 
+        else // Jei failas nenurodytas, prašoma įvesti ranka
         {
             std::cerr << "Nepavyko atidaryti failo: " << argv[1] << std::endl;
             return 1;  // Klaidos kodas
@@ -128,9 +128,7 @@ int main(int argc, char* argv[])
     {
         
         char x = (input[(i - 4) % input.length()] + 3);
-    
         char y = (((i % 2 == 0) ? input[(i + 1) % input.length()] : input[0]) * 7);
-
         char z = (((i % 2 != 0) ? static_cast<int>(input[(i + 1) % input.length()]) : static_cast<int>(input[0])) % 256);
         
         output.push_back(x);
@@ -138,12 +136,12 @@ int main(int argc, char* argv[])
         output.push_back(z);
     }
 
-    std::string FinalOutput = stringToHex(output);
+    std::string FinalOutput = stringToHex(output);//Pavercia i hex
 
     int max_splits = 8; 
-    std::vector<std::string> pieces = split_string(FinalOutput, max_splits);
+    std::vector<std::string> pieces = splitString(FinalOutput, max_splits);//Padalina i kelis stringus
 
-    FinalOutput = recombine_pieces(pieces);
+    FinalOutput = recombinePieces(pieces);//Sudeda atgal skirtingu eiliskumu
 
     if (FinalOutput.size() > 64)
     FinalOutput = FinalOutput.substr(0, 64);
