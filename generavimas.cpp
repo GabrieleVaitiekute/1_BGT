@@ -11,7 +11,7 @@ std::uniform_int_distribution<char> dis(33, 126); // ASCII
 
 int main()
 {
-    std::ofstream GenFailas("SkirtingosPoros.txt");
+    std::ofstream GenFailas("PorosVisiskaiSkirtingos.txt");
 
     if (!GenFailas.is_open())
     {
@@ -29,7 +29,7 @@ int main()
         */
 
         
-       /*4 ŽINGSNIS 
+       /*4 ŽINGSNIS */
     
         for(int e = 0; e < 4; e++)//pridetas, kai prireike generuoti poras
         {
@@ -52,10 +52,10 @@ int main()
 
                 GenFailas << RanStringA << " " << RanStringB <<std::endl;
             }
-        }*/
+        }
 
 
-        /*6 ŽINGSNIS*/
+        /*6 ŽINGSNIS
 
 
             for(int a=0; a<100000; a++)
@@ -79,7 +79,7 @@ int main()
                 GenFailas<< " " <<RanStringB;//Isspausdintas B
 
                 GenFailas<< std::endl;
-            } 
+            } */
 
     GenFailas.close();
 

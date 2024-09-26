@@ -98,9 +98,9 @@ int main(int argc, char* argv[])
         if (inputFailas) 
         {
             std::string eilute;
-            while (std::getline(inputFailas, eilute)) {
-                input += eilute;  // Nuskaito failo turinį
-            }
+            while (std::getline(inputFailas, eilute))
+                 input += eilute;  // Nuskaito failo turinį
+            
             inputFailas.close();
         } 
         else // Jei failas nenurodytas, prašoma įvesti ranka
@@ -116,7 +116,7 @@ int main(int argc, char* argv[])
     }
 
     int s = 0;
-
+	
     while(input.length() < 63)
     {
         input.push_back(input[s % input.length()]);
@@ -147,5 +147,5 @@ int main(int argc, char* argv[])
     FinalOutput = FinalOutput.substr(0, 64);
 
     std::cout << "Rezultatas: " << FinalOutput;
-    
+
 }
