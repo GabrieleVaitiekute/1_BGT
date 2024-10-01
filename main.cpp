@@ -5,6 +5,16 @@
 #include <string>
 #include <vector>
 
+// Padding funkcija, kad eilutė būtų pakankamo ilgio
+std::string padToLength(const std::string& input, size_t length) {
+    std::string padded = input;
+    while (padded.length() < length) {
+        padded += std::to_string(input.length());  // Pridedame eilutės ilgį kaip užpildymą
+    }
+    return padded.substr(0, length);  // Iškerpame, jei per ilga
+}
+
+
 std::string stringToHex(const std::string& output)
 {
     std::ostringstream hexStream;
@@ -115,28 +125,14 @@ int main(int argc, char* argv[])
         std::getline(std::cin, input);
     }
 
-    int s = 0;
-	
-    while(input.length() < 63)
+    if(input.length() < 63)
     {
-        input.push_back(input[s % input.length()]);
-        s++;
-    }
-    
-    
-    for (int i = input.length(); i > 0; i--)
-    {
-        
-        char x = (input[(i - 4) % input.length()] + 3);
-        char y = (((i % 2 == 0) ? input[(i + 1) % input.length()] : input[0]) * 7);
-        char z = (((i % 2 != 0) ? static_cast<int>(input[(i + 1) % input.length()]) : static_cast<int>(input[0])) % 256);
-        
-        output.push_back(x);
-        output.push_back(y);
-        output.push_back(z);
+    // Užpildymas, kad tekstas būtų bent 64 simbolių
+    input = padToLength(input, 64);
     }
 
-    std::string FinalOutput = stringToHex(output);//Pavercia i hex
+    
+    std::string FinalOutput = stringToHex(input);//Pavercia i hex
 
     int max_splits = 8; 
     std::vector<std::string> pieces = splitString(FinalOutput, max_splits);//Padalina i kelis stringus
