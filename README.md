@@ -49,8 +49,8 @@
   Šiam etapui buvo sukurti:
   - 3 failai (avienas.txt, bvienas.txt, cvienas.txt), turinys po vieną simbolį a, b, c atitinkamai. Paleidus programą kelis kartus su vienu ir tuo pačiu failu išvestas toks pat 64 simbolių ilgio rezultatas, nepaisant to, kad jame buvo tik 1 simbolis. Taip įvyko su visais 3 failais.
   - 3 failai (Daug1.txt, Daug2.txt, Daug3.txt), turinys skirtingą kiekį simbolių, bet visi virš 1000. Paleidus programą kelis kartus su vienu ir tuo pačiu failu išvestas toks pat 64 simbolių ilgio rezultatas. Taip įvyko su visais 3 failais.
-  - 3 failai (SkiriasiVienu1.txt, SkiriasiVienu2.txt, SkiriasiVienu3.txt), kurie skirasi vienu viduriniu simboliu. Paleidus programą kelis kartus su vienu ir tuo pačiu failu išvestas toks pat 64 simbolių ilgio rezultatas. Taip įvyko su visais 3 failais. Taip pat svarbu paminėti, kad visų trijų failų         rezultatai skiriasi: 4c7d797d7a6b6c53537d2d6b2c6b32585e7d7d6b69556b2a731f7d296b557c56, c6fa47d516b27621e7d4a6b235e17d5b6b7230ee7d806b364c5e7d7367d446b4, d796b2a753537d2d6b2f2f49732585e7d7d6b69554c731f7d296b557c567d326.
-  - Vienas tuščias failas, kurį paleidus, nebuvo išvestas joks rezultatas.
+  - 3 failai (SkiriasiVienu1.txt, SkiriasiVienu2.txt, SkiriasiVienu3.txt), kurie skirasi vienu viduriniu simboliu. Paleidus programą kelis kartus su vienu ir tuo pačiu failu išvestas toks pat 64 simbolių ilgio rezultatas. Taip įvyko su visais 3 failais. Taip pat svarbu paminėti, kad visų trijų failų         rezultatai skiriasi: 34aea60d913ea8016f5b9f8c7f152e8dc2139610479ceccde73412c4d8946625, 7b2408cf0b3f7536a4b6a77545792a255782511f988f2f351f6a02261789fb9e, e3183cf4142bcaffa1d4073099bead2857bffd80d92f9b9f70d8ed6da4916156.
+  - Vienas tuščias failas, kurį paleidus, buvo išmestas pranešimas, kad failas yra tuščias.
   
   ### 3 etapas
 
