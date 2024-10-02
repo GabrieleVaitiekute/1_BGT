@@ -60,8 +60,8 @@
   Vidurkių diagrama 
 ![image](https://github.com/user-attachments/assets/4230fab7-e64d-4a01-b85e-c6be0754c17a)
 
+Lygindami v0.1 ir v0.2 laikus pasebėsite, kad v0.2 laikai yra geresni.
 
-  
   ### 4 ir 5 etapai
   Buvo sugenera 25 000 porų, kurių ilgis 10 simbolių, kitas 25 000 porų, kurių ilgis - 100, dar kitas 25000 poras - 500, ir galiausiai likusias 25 000 poras, kurių ilgis - 1000 simbolių. Failas su poromis nuskaičiuotas su programa, kuri išvedė gautus rezultatus į kitą failą, tuomet buvo nuskaityti duomenys ir kievienos poroas hash'ai palyginti. Nebuvo rasta nei vienos vienodos poros, vadinasi funkcija atitinka 6 reikalavimą, t.y., atsparumą kolizijai.
   
