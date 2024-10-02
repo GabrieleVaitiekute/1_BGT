@@ -56,16 +56,17 @@
   Šiam etapui buvo sukurti:
   - 3 failai (avienas.txt, bvienas.txt, cvienas.txt), turinys po vieną simbolį a, b, c atitinkamai. Paleidus programą kelis kartus su vienu ir tuo pačiu failu išvestas toks pat 64 simbolių ilgio rezultatas, nepaisant to, kad jame buvo tik 1 simbolis. Taip įvyko su visais 3 failais.
   - 3 failai (Daug1.txt, Daug2.txt, Daug3.txt), turinys skirtingą kiekį simbolių, bet visi virš 1000. Paleidus programą kelis kartus su vienu ir tuo pačiu failu išvestas toks pat 64 simbolių ilgio rezultatas. Taip įvyko su visais 3 failais.
-  - 3 failai (SkiriasiVienu1.txt, SkiriasiVienu2.txt, SkiriasiVienu3.txt), kurie skirasi vienu viduriniu simboliu. Paleidus programą kelis kartus su vienu ir tuo pačiu failu išvestas toks pat 64 simbolių ilgio rezultatas. Taip įvyko su visais 3 failais. Taip pat svarbu paminėti, kad visų trijų failų         rezultatai skiriasi: ca0620fce5f0e00dd730772da53502a64b69cd385bcd1d0ed42f34d5f6ba3b22, 8b57d351ce7605823d3f69cc23df289f7da6f574675fa8faa7bb9b5e80ccfcf5, eb2bb6ec1d3b4a0540edf45236787c64cafbcda5b9a13c835a04efd6b91bbcfd.
+  - 3 failai (SkiriasiVienu1.txt, SkiriasiVienu2.txt, SkiriasiVienu3.txt), kurie skirasi vienu viduriniu simboliu. Paleidus programą kelis kartus su vienu ir tuo pačiu failu išvestas toks pat 64 simbolių ilgio rezultatas. Taip įvyko su visais 3 failais. Taip pat svarbu paminėti, kad visų trijų failų         rezultatai skiriasi: 379d7e21b430c227c4d217ff1f66035fd508afffee85ae5d5e69754c8ee460da, 7992f7dd32f30e46127c238c5e8c39f3799dbabec6d1f685dfa9cf9298260847, 6ba46a2e616d8b35b0d0d807283dfd076e8052845afd7e3b40a37666cb62b06d.
   - Vienas tuščias failas, kurį paleidus, buvo išmestas pranešimas, kad failas yra tuščias.
   
   ### 3 etapas
 
   Lentelė su visais laikais ir vidurkiais
- ![Screenshot 2024-10-02 163358](https://github.com/user-attachments/assets/b6177657-7a67-49ce-83e4-a83efdfcce45)
+ ![Screenshot 2024-10-02 215854](https://github.com/user-attachments/assets/cdaec3e6-d966-4aa2-91f3-a0ae3ea77416)
+
 
   Vidurkių diagrama 
-![image](https://github.com/user-attachments/assets/4230fab7-e64d-4a01-b85e-c6be0754c17a)
+![image](https://github.com/user-attachments/assets/aedf9379-b7a6-495a-a1e9-ee74badaa8e0)
 
 Lygindami v0.1 ir v0.2 laikus pasebėsite, kad v0.2 laikai yra geresni.
 
