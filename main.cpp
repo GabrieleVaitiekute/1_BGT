@@ -17,7 +17,7 @@ std::string padToLength(const std::string &input, size_t length)
         padded += std::to_string(input.length() + s * 3);
         s++;
     }
-    return padded; // Iškerpame, jei per ilga
+    return padded; 
 }
 
 std::string stringToHex(const std::string &output)
@@ -170,9 +170,8 @@ int main(int argc, char *argv[])
 
         else if (nuskaitymas == 3) // 3 testavimo punktas (su konstitucija.txt)
         {
-            int eViso = 4;   // kiek reikia nuskaityti eiluciu is viso
+            int eViso = 512;   // kiek reikia nuskaityti eiluciu is viso
             int eKiekis = 0; // kiek  nuskaityta
-            input.clear(); 
             if (inputFailas)
             {
                 while (std::getline(inputFailas, eilute) && eKiekis < eViso)
