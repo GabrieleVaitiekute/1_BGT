@@ -161,20 +161,20 @@ int main(int argc, char *argv[])
 
                 if (input.empty())
                 {
-                    std::cerr << "Failas tuscias: " << argv[1] << std::endl;
+                    std::cerr << "Failas tuscias: " << argv[2] << std::endl;
                     return 1; // Exit early
                 }
             }
             else
             {
-                std::cerr << "Nepavyko atidaryti failo: " << argv[1] << std::endl;
+                std::cerr << "Nepavyko atidaryti failo: " << argv[2] << std::endl;
                 return 1;
             }
         }
 
         else if (nuskaitymas == 3) // 3 testavimo punktas (su konstitucija.txt)
         {
-            int eViso = 512;   // kiek reikia nuskaityti eiluciu is viso
+            int eViso = 521;   // kiek reikia nuskaityti eiluciu is viso
             int eKiekis = 0; // kiek  nuskaityta
             if (inputFailas)
             {
@@ -187,14 +187,14 @@ int main(int argc, char *argv[])
 
                 if (input.empty())
                 {
-                    std::cerr << "Failas tuscias: " << argv[1] << std::endl;
+                    std::cerr << "Failas tuscias: " << argv[2] << std::endl;
                     return 1; // Exit early
                 }
             }
 
             else
             {
-                std::cerr << "Nepavyko atidaryti failo: " << argv[1] << std::endl;
+                std::cerr << "Nepavyko atidaryti failo: " << argv[2] << std::endl;
                 return 1;
             }
         }
@@ -215,13 +215,13 @@ int main(int argc, char *argv[])
                 inputFailas.close();
                 if (poros.empty())
                 {
-                    std::cerr << "Failas tuscias: " << argv[1] << std::endl;
+                    std::cerr << "Failas tuscias: " << argv[2] << std::endl;
                     return 1; // Exit early
                 }
             }
             else
             {
-                std::cerr << "Nepavyko atidaryti failo: " << argv[1] << std::endl;
+                std::cerr << "Nepavyko atidaryti failo: " << argv[2] << std::endl;
                 return 1;
             }
         }
