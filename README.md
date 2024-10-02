@@ -49,18 +49,19 @@
   Šiam etapui buvo sukurti:
   - 3 failai (avienas.txt, bvienas.txt, cvienas.txt), turinys po vieną simbolį a, b, c atitinkamai. Paleidus programą kelis kartus su vienu ir tuo pačiu failu išvestas toks pat 64 simbolių ilgio rezultatas, nepaisant to, kad jame buvo tik 1 simbolis. Taip įvyko su visais 3 failais.
   - 3 failai (Daug1.txt, Daug2.txt, Daug3.txt), turinys skirtingą kiekį simbolių, bet visi virš 1000. Paleidus programą kelis kartus su vienu ir tuo pačiu failu išvestas toks pat 64 simbolių ilgio rezultatas. Taip įvyko su visais 3 failais.
-  - 3 failai (SkiriasiVienu1.txt, SkiriasiVienu2.txt, SkiriasiVienu3.txt), kurie skirasi vienu viduriniu simboliu. Paleidus programą kelis kartus su vienu ir tuo pačiu failu išvestas toks pat 64 simbolių ilgio rezultatas. Taip įvyko su visais 3 failais. Taip pat svarbu paminėti, kad visų trijų failų         rezultatai skiriasi: 4c7d797d7a6b6c53537d2d6b2c6b32585e7d7d6b69556b2a731f7d296b557c56, c6fa47d516b27621e7d4a6b235e17d5b6b7230ee7d806b364c5e7d7367d446b4, d796b2a753537d2d6b2f2f49732585e7d7d6b69554c731f7d296b557c567d326.
-  - Vienas tuščias failas, kurį paleidus, nebuvo išvestas joks rezultatas.
+  - 3 failai (SkiriasiVienu1.txt, SkiriasiVienu2.txt, SkiriasiVienu3.txt), kurie skirasi vienu viduriniu simboliu. Paleidus programą kelis kartus su vienu ir tuo pačiu failu išvestas toks pat 64 simbolių ilgio rezultatas. Taip įvyko su visais 3 failais. Taip pat svarbu paminėti, kad visų trijų failų         rezultatai skiriasi: ca0620fce5f0e00dd730772da53502a64b69cd385bcd1d0ed42f34d5f6ba3b22, 8b57d351ce7605823d3f69cc23df289f7da6f574675fa8faa7bb9b5e80ccfcf5, eb2bb6ec1d3b4a0540edf45236787c64cafbcda5b9a13c835a04efd6b91bbcfd.
+  - Vienas tuščias failas, kurį paleidus, buvo išmestas pranešimas, kad failas yra tuščias.
   
   ### 3 etapas
 
   Lentelė su visais laikais ir vidurkiais
-  ![Screenshot 2024-09-26 143516](https://github.com/user-attachments/assets/7229d8d2-40cc-4877-bc72-274dd26987ad) 
+ ![Screenshot 2024-10-02 163358](https://github.com/user-attachments/assets/b6177657-7a67-49ce-83e4-a83efdfcce45)
 
   Vidurkių diagrama 
-  ![Screenshot 2024-09-26 143521](https://github.com/user-attachments/assets/29f8dff1-4091-43f6-8c1a-d73328d84c80) 
+![image](https://github.com/user-attachments/assets/4230fab7-e64d-4a01-b85e-c6be0754c17a)
 
-  
+Lygindami v0.1 ir v0.2 laikus pasebėsite, kad v0.2 laikai yra geresni.
+
   ### 4 ir 5 etapai
   Buvo sugenera 25 000 porų, kurių ilgis 10 simbolių, kitas 25 000 porų, kurių ilgis - 100, dar kitas 25000 poras - 500, ir galiausiai likusias 25 000 poras, kurių ilgis - 1000 simbolių. Failas su poromis nuskaičiuotas su programa, kuri išvedė gautus rezultatus į kitą failą, tuomet buvo nuskaityti duomenys ir kievienos poroas hash'ai palyginti. Nebuvo rasta nei vienos vienodos poros, vadinasi funkcija atitinka 6 reikalavimą, t.y., atsparumą kolizijai.
   
