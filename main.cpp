@@ -29,34 +29,6 @@ std::string stringToHex(const std::string &output)
 
     return hexStream.str();
 }
-// Helper function to rotate bits to the right
-unsigned char rotateRight(unsigned char value, int shift)
-{
-    return (value >> shift) | (value << (8 - shift));
-}
-// Funkcija, kuri naudoja XOR ir rotavimą, kad geriau išsklaidytų bitus
-std::string avalancheXOR(const std::string &input)
-{
-    int rounds = 3;
-    int prime = 257;
-    std::string result = input;
-
-    for (int r = 0; r < rounds; ++r)
-    {
-        for (size_t i = 0; i < result.length(); ++i)
-        {
-            char xor_result = (result[i] ^ rotateRight(result[(i + 1) % result.length()], (3 + r))) + (i % 7);
-
-            // Modular arithmetic transformation
-            xor_result = (xor_result + (i * prime)) % 256; // Modulo 256 to keep it within char range
-
-            xor_result ^= rotateRight(result[(i + 2) % result.length()], (5 + r)); // Additional rotation
-            result[i] = xor_result;
-        }
-    }
-
-    return result;
-}
 
 int calculateASCIIsum(const std::string &str)
 {
@@ -67,17 +39,49 @@ int calculateASCIIsum(const std::string &str)
     return ascii_sum;
 }
 
-std::vector<int> calculateSplitPoints(const std::string &FinalOutput)
+
+unsigned char rotateRight(unsigned char value, int shift)
+{
+    return (value >> shift) | (value << (8 - shift));
+}
+// Funkcija, kuri naudoja XOR ir rotavimą, kad geriau išsklaidytų bitus
+std::string avalancheXOR(const std::string &input)
+{
+    int rounds = 3;
+    int prime = 257;
+    std::string result = input;
+    int dynamic_shift = (calculateASCIIsum(input) % 7) + 1; // Dinamiškas poslinkis
+
+    for (int r = 0; r < rounds; r++)
+    {
+        for (size_t i = 0; i < result.length(); i++)
+        {
+            char xor_result = (result[i] ^ rotateRight(result[(i + 1) % result.length()], (dynamic_shift + r))) + (i % 7);
+
+            // Papildoma modulo aritmetika
+            xor_result = (xor_result + (i * prime)) % 256; // Modulo 256 išlaikyti char ribose
+
+            xor_result ^= rotateRight(result[(i + 2) % result.length()], (5 + r + dynamic_shift)); // Papildomas poslinkis
+            result[i] = xor_result;
+        }
+    }
+
+    return result;
+}
+
+
+
+std::vector<int> calculateSplitPoints(const std::string &output)
 {
     int max_splits = 10;
     std::vector<int> split_points;
-    int totalLength = FinalOutput.length();
-    int ascii_sum = calculateASCIIsum(FinalOutput);
+    int totalLength = output.length();
+    int ascii_sum = calculateASCIIsum(output);
     int rolling_hash = 0;
 
     for (int i = 1; i <= max_splits; i++)
     {
-        rolling_hash = (rolling_hash + static_cast<int>(FinalOutput[i % totalLength]) * i) % totalLength;
+        rolling_hash = (rolling_hash + static_cast<int>(output[i % totalLength]) * i) % totalLength;
         int split_point = (ascii_sum * i + rolling_hash) % totalLength;
         if (split_point > 0 && split_point < totalLength && std::find(split_points.begin(), split_points.end(), split_point) == split_points.end())
         {
@@ -89,26 +93,26 @@ std::vector<int> calculateSplitPoints(const std::string &FinalOutput)
     return split_points;
 }
 
-std::vector<std::string> splitString(const std::string &FinalOutput)
+std::vector<std::string> splitString(const std::string &output)
 {
-    std::vector<int> splitPoints = calculateSplitPoints(FinalOutput);
+    std::vector<int> splitPoints = calculateSplitPoints(output);
     std::vector<std::string> pieces;
 
     int start = 0;
     for (int split_point : splitPoints)
     {
-        pieces.push_back(FinalOutput.substr(start, split_point - start));
+        pieces.push_back(output.substr(start, split_point - start));
         start = split_point;
     }
-    pieces.push_back(FinalOutput.substr(start)); // Prideda paskutinę dalį
+    pieces.push_back(output.substr(start)); // Prideda paskutinę dalį
 
     return pieces;
 }
-std::string recombinePieces(std::vector<std::string> &pieces, const std::string &input)
+std::string recombinePieces(std::vector<std::string> &pieces, const std::string &output)
 {
 
     std::vector<std::pair<int, std::string>> piece_scores;
-    int input_checksum = calculateASCIIsum(input);
+    int input_checksum = calculateASCIIsum(output);
 
     for (const auto &piece : pieces)
     {
@@ -141,8 +145,8 @@ int main(int argc, char *argv[])
     std::string input, eilute, input2;
     std::vector<std::pair<std::string, std::string>> poros;
 
-    std::ifstream inputFailas(argv[1]);// ivestas failas
-    int nuskaitymas = std::stoi(argv[2]);// ivesta reiksme, galima ja nustatyti : 1, 3 , 4. Nuo reikšmės priklauso kaip bus nuskaitoma ir tvarkomas inputas
+    std::ifstream inputFailas(argv[2]);// ivestas failas
+    int nuskaitymas = std::stoi(argv[1]);// ivesta reiksme, galima ja nustatyti : 1, 3 , 4. Nuo reikšmės priklauso kaip bus nuskaitoma ir tvarkomas inputas
 
     if (argc > 2)
     {
@@ -222,7 +226,7 @@ int main(int argc, char *argv[])
             }
         }
     }
-    else // Jei failas nenurodytas, prayšoma įvesti ranka
+    else // Jei failas nenurodytas, prašoma įvesti ranka
     {
         std::cout << "Iveskite norima teksta: ";
         std::getline(std::cin, input);

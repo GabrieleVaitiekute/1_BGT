@@ -11,7 +11,7 @@ std::uniform_int_distribution<char> dis(33, 126); // ASCII
 
 int main()
 {
-    std::ofstream GenFailas("PorosVisiskaiSkirtingos.txt");
+    std::ofstream GenFailas("PorosVienuSkirtingos.txt");
 
     if (!GenFailas.is_open())
     {
@@ -55,13 +55,13 @@ int main()
         }
 
 
-        /*6 ŽINGSNIS
+        /*6 ŽINGSNIS*/
 
 
             for(int a=0; a<100000; a++)
             {
                 std::string RanStringA, RanStringB;
-                for(int i = 0; i < 500; i++)
+                for(int i = 0; i < 600; i++)
                 {
                     char RanChar = dis(generuoti);
                     RanStringA += RanChar;
@@ -79,7 +79,7 @@ int main()
                 GenFailas<< " " <<RanStringB;//Isspausdintas B
 
                 GenFailas<< std::endl;
-            } */
+            } 
 
     GenFailas.close();
 
