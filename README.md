@@ -55,10 +55,11 @@
   ### 3 etapas
 
   Lentelė su visais laikais ir vidurkiais
-  ![Screenshot 2024-09-26 143516](https://github.com/user-attachments/assets/7229d8d2-40cc-4877-bc72-274dd26987ad) 
+ ![Screenshot 2024-10-02 163358](https://github.com/user-attachments/assets/b6177657-7a67-49ce-83e4-a83efdfcce45)
 
   Vidurkių diagrama 
-  ![Screenshot 2024-09-26 143521](https://github.com/user-attachments/assets/29f8dff1-4091-43f6-8c1a-d73328d84c80) 
+![image](https://github.com/user-attachments/assets/4230fab7-e64d-4a01-b85e-c6be0754c17a)
+
 
   
   ### 4 ir 5 etapai
