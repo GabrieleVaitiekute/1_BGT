@@ -2,46 +2,53 @@
 
 ## Pseudo kodas
 
-1. **Duomenų įvedimas\nuskaitymas**
-  - **if (inputFailas)** Jei perduodamas failo pavadinimas kaip argumentas, nuskaitoma viso failo turinys.
-  - **else**Jei argumentų nėra, programa paprašo vartotojo įvesti tekstą per komandinę eilutę.
+1. **Duomenų įvedimas\nuskaitymas** Svarbu komandinėje eilutėje įvesti nuskaitymo pasirinkimo skaičių, bei jei reikia ir failo, nuo kurio norite nuskaityti pavadinimą
+  -  Komandinėje eilutėje turi būti pateiktas skaičius nurodantis, kokį nuskaitymo būdą norima naudoti (1 - jei nuskaityti viską arba įvesti ranka; 3 - tam tikrą kiekį eilučių(eViso), kiekį galima pakeisti main.cpp faile; 4 - jei norima nuskaityti poras nuo failo ) Skaičiai atitinka testavimo etapus, bet 4 taip pat tinka ir 6 etapui.
+  -  Jei perduodamas failo pavadinimas kaip argumentas, nuskaitoma viso failo turinys.
+  -  Jei nurodytas tik skaičius(1), programa paprašo vartotojo įvesti tekstą per komandinę eilutę.
+
+2. **hashInput** Įvesties apdorojimas, priklausant nuo nuskaitymo būdo pasirinkimo 
+  - Jei buvo įvestas skaičius 1 arba 3, nusiunčiamas jis vienas apdoroti ir šios funkcijos trukmė yra matuojama
+  - Jei buvo įvestas 4, cikliškai siunčiomi pirmas ir antras poros nariai, trukmė neskaičiuojama
     
-2.  **while(input.length() < 63)** Įvesties prailginimas
-  - Jei įvestis(pavadinta input) per trumpa, ji prailginama kartojant input simbolius.
-    
-3. **for (int i = input.length(); i > 0; i--)** Simbolių transformacija
-  - Kiekvienam simboliui skaičiuojami trys nauji simboliai(x, y, z), remiantis originalaus simbolio pozicija ir vertėmis.
-  - **x = (input[(i - 4) % input.length()] + 3)**
-    Gįžtame atgal 4 pozicijas nuo dabartinio i indekso ir prieitą simbolio vertę padidiname 3, naudojant modulio operaciją, kad išvengtume perėjimo už eilutės ribų.
-  - **y = (((i % 2 == 0) ? input[(i + 1) % input.length()] : input[0]) * 7)**
-    Pirmiausia tikrinama, ar i yra lyginis (i % 2 == 0). Jei taip, pasirenkamas simbolis, esantis viena pozicija toliau nuo i, jei ne - paimamas pirmasis įvesties simbolis (input[0]).
-    Gautas simbolis dauginamas iš 7.
-  - **z = (((i % 2 != 0) ? static_cast<int>(input[(i + 1) % input.length()]) : static_cast<int>(input[0])) % 256)**
-    Tikrinama, ar i yra nelyginis. Jei taip, pasirenkamas simbolis, esantis viena pozicija toliau nuo i, jei ne - paimamas pirmasis įvesties simbolis.
-    Gautas simbolio ASCII vertė moduliavojama su 256, kad užtikrintume, jog rezultatas tilptų į vieno baito dydį.
-    
-4. **stringToHex(output)** Konvertavimas
-  - Konvertuoja eilutę į jos atitinkamą šešioliktainę reikšmę
-    
-5. **calculateSplitPoints(FinalOutput, max_splits)** Teksto dalinimo taškų radimas
-  - **int ascii_sum = calculateASCIIsum(FinalOutput)** Apskaičiuojama visų eilutės simbolių ASCII vertė
+3.  **padToLength** Įvesties prailginimas
+  - Jei įvestis(pavadinta input) per trumpa, ji prailginama pridedant reikšmes, pagrįstas pradiniu teksto ilgiu ir iteracijos skaičiaus su 3 daugyba.
+
+4. **calculateSplitPoints(const std::string &output)** Teksto dalinimo taškų radimas
+  - **int ascii_sum = calculateASCIIsum(output)** Apskaičiuojama visų eilutės simbolių ASCII vertė
   - **for (int i = 1; i <= max_splits; i++)** Skaičiuojamas potencialus skaidymo taškas, naudojant ASCII sumą, simbolių pozicijas ir modulį.
   - **if(...)**  Užtikrina, kad vienas ir tas pats skaidymo taškas nebūtų pridėtas kelis kartus.
   - **std::sort(...)**  Taškai išdėstomi didėjimo tvarka, kas būtina tolesniam teksto skaidymui.
     
-6. **splitString(FinalOutput, max_splits)** Teksto dalinimas
+5. **splitString(const std::string &output)** Teksto dalinimas
   - iš 5 punkto funkcijos gaunami dalijimo taškai
   - **for (int split_point : splitPoints)** tekstas dalijamas į skirtingo ilgio dalis
     
-7. **recombinePieces(pieces)** Teskto sudėjimas atgal
+6. **recombinePieces(std::vector<std::string> &pieces, const std::string &output)** Teskto sudėjimas atgal
   - Išskaidytos dalys sujungiamos atgal į vieną tekstą. Dalys rikiuojamos pagal jų ASCII sumą mažėjimo tvarka (dar kartą panaudojam)
   - **for (const auto& piece : pieces)** Apskaičiuojama gautų dalių simbolių ASCII vertė su calculateASCIIsum(FinalOutput) funkcija
   - **std::sort** Dalys išrikiuojamos pagal ASCII vertes mažėjimo tvarka
   - **for (const auto& piece : piece_scores)** dalys sudedamos atgal į viena string
     
-8. **if (FinalOutput.size() > 64)** Išvesties trumpinimas
+7. **avalancheXOR(const std::string &input)**
+  - **dynamic_shift = (calculateASCIIsum(input) % 7) + 1** Apskaičiuojamas dinamiškas bitų poslinkis, remiantis visos įvesties ASCII sumos liekana dalijant iš 7, prie kurios pridedamas 1
+  - **for (int r = 0; r < rounds; r++)** Ciklas vyksta 3 kartus
+  - **for (size_t i = 0; i < result.length(); i++)** Kiekvieno simbolio result eilutėje vykdomos operacijos
+  - **char xor_result = (result[i] ^ rotateRight(result[(i + 1) % result.length()], (dynamic_shift + r))) + (i % 7)** Skaičiuojama nauja simbolio vertė naudojant XOR tarp dabartinio simbolio ir kito, kuris paslinktas per nustatytą bitų skaičių, pridedant liekaną iš i dalijant iš 7
+  - **xor_result = (xor_result + (i * prime)) % 256**  Prie XOR rezultato pridedamas i ir prime sandauga, o gautas rezultatas dalijamas iš 256 modulo,  kad rezultatas išliktų ribose
+  - **xor_result ^= rotateRight(result[(i + 2) % result.length()], (5 + r + dynamic_shift))** Dar kartą vykdomas XOR tarp xor_result ir dar vieno paslinkto simbolio
+  - **result[i] = xor_result** Atnaujinamas result eilutės i simbolis su naujai gauta xor_result reikšme
     
-9. **Išvesties spausdinimas**
+8. **rotateRight(unsigned char value, int shift)**
+  - grąžina naują simbolio bitų išdėstymą, kur bitai, esantys už shift pozicijų, yra perstumiami į dešinę (value >> shift), o likę bitai (8 minus shift) yra perkeliami į kairę (value << (8 - shift)), taip sukant bitus į dešinę.
+    
+9. **stringToHex(output)** Konvertavimas
+  - Konvertuoja sutrumpintą iki reikiamo ilgio eilutę į jos atitinkamą šešioliktainę reikšmę
+    
+10. **Išvesties spausdinimas**
+  - Jei buvo nurodytas nuskaitymo būdas 1 arba 3, tai rezultatas bus išvestas į terminalą
+  - Jei buvo nurodytas 4, tai rezultatus rasite faile Rezultatai.txt
+    
 
 ## Testavimas
 
@@ -63,7 +70,7 @@
 Lygindami v0.1 ir v0.2 laikus pasebėsite, kad v0.2 laikai yra geresni.
 
   ### 4 ir 5 etapai
-  Buvo sugenera 25 000 porų, kurių ilgis 10 simbolių, kitas 25 000 porų, kurių ilgis - 100, dar kitas 25000 poras - 500, ir galiausiai likusias 25 000 poras, kurių ilgis - 1000 simbolių. Failas su poromis nuskaičiuotas su programa, kuri išvedė gautus rezultatus į kitą failą, tuomet buvo nuskaityti duomenys ir kievienos poroas hash'ai palyginti. Nebuvo rasta nei vienos vienodos poros, vadinasi funkcija atitinka 6 reikalavimą, t.y., atsparumą kolizijai.
+  Buvo sugenera 25 000 porų, kurių ilgis 10 simbolių, kitas 25 000 porų, kurių ilgis - 100, dar kitas 25000 poras - 500, ir galiausiai likusias 25 000 poras, kurių ilgis - 1000 simbolių. Failas su poromis nuskaitytas su main.cpp programa, kuri išvedė gautus rezultatus į kitą failą (Rezultatai.txt), tuomet failas tikrinimas.cpp nuskaitė duomenys nuo rezultatų failo ir kievienos poroas hash'ai buvo palyginti. Nebuvo rasta nei vienos vienodos poros, vadinasi funkcija atitinka 6 reikalavimą, t.y., atsparumą kolizijai. 
   
   ### 6 etapas
 Įvedus poras (pvz.: Lietuva ir lietuva) gaunami šiektiek sutampantys rezultatai, tai reiškia, kad lavinos efektas nėra pilnai tenkinamas. (771466968144c6c14614f3a4c641475792c6c14614f3a4c6c14754f2c4c64146 ir 77df6f3a6c6cf4756f2c6c64f46577f46968f46c6cf4616f3a6c679f47478c36). 
