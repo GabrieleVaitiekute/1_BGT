@@ -63,7 +63,7 @@
 Lygindami v0.1 ir v0.2 laikus pasebėsite, kad v0.2 laikai yra geresni.
 
   ### 4 ir 5 etapai
-  Buvo sugenera 25 000 porų, kurių ilgis 10 simbolių, kitas 25 000 porų, kurių ilgis - 100, dar kitas 25000 poras - 500, ir galiausiai likusias 25 000 poras, kurių ilgis - 1000 simbolių. Failas su poromis nuskaičiuotas su programa, kuri išvedė gautus rezultatus į kitą failą, tuomet buvo nuskaityti duomenys ir kievienos poroas hash'ai palyginti. Nebuvo rasta nei vienos vienodos poros, vadinasi funkcija atitinka 6 reikalavimą, t.y., atsparumą kolizijai.
+  Buvo sugenera 25 000 porų, kurių ilgis 10 simbolių, kitas 25 000 porų, kurių ilgis - 100, dar kitas 25000 poras - 500, ir galiausiai likusias 25 000 poras, kurių ilgis - 1000 simbolių. Failas su poromis nuskaitytas su main.cpp programa, kuri išvedė gautus rezultatus į kitą failą (Rezultatai.txt), tuomet failas tikrinimas.cpp nuskaitė duomenys nuo rezultatų failo ir kievienos poroas hash'ai buvo palyginti. Nebuvo rasta nei vienos vienodos poros, vadinasi funkcija atitinka 6 reikalavimą, t.y., atsparumą kolizijai. 
   
   ### 6 etapas
 Įvedus poras (pvz.: Lietuva ir lietuva) gaunami šiektiek sutampantys rezultatai, tai reiškia, kad lavinos efektas nėra pilnai tenkinamas. (771466968144c6c14614f3a4c641475792c6c14614f3a4c6c14754f2c4c64146 ir 77df6f3a6c6cf4756f2c6c64f46577f46968f46c6cf4616f3a6c679f47478c36). 
