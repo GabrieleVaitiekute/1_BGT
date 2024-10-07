@@ -159,11 +159,6 @@ int main(int argc, char *argv[])
 
                 inputFailas.close();
 
-                if (input.empty())
-                {
-                    std::cerr << "Failas tuscias: " << argv[2] << std::endl;
-                    return 1; // Exit early
-                }
             }
             else
             {
@@ -184,12 +179,6 @@ int main(int argc, char *argv[])
                     eKiekis++;
                 }
                 inputFailas.close();
-
-                if (input.empty())
-                {
-                    std::cerr << "Failas tuscias: " << argv[2] << std::endl;
-                    return 1; // Exit early
-                }
             }
 
             else
@@ -213,11 +202,6 @@ int main(int argc, char *argv[])
                 }
 
                 inputFailas.close();
-                if (poros.empty())
-                {
-                    std::cerr << "Failas tuscias: " << argv[2] << std::endl;
-                    return 1; // Exit early
-                }
             }
             else
             {
